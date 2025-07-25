@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "ee63ef99-e48f-431a-ac73-7c897d5f6807",
+		"name": "Reqres API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46924775",
+		"_collection_link": "https://wardahsattar-3774774.postman.co/workspace/Wardah-Sattar's-Workspace~c41a58f2-3015-40a0-89de-e929155c0ff4/collection/46924775-ee63ef99-e48f-431a-ac73-7c897d5f6807?action=share&source=collection_link&creator=46924775"
+	},
+	"item": [
+		{
+			"name": "GET List Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"console.log(\"User email:\", response.data[0].email);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User list is not empty\", () => {\r",
+							"  pm.expect(response.data.length).to.be.above(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users?page=2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							"\r",
+							"pm.variables.set(\"randomName\", \"User\" + Math.floor(Math.random() * 1000));\r",
+							"pm.variables.set(\"randomJob\", \"QA_\" + Math.random().toString(36).substring(7));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"console.log(\"Created ID:\", jsonData.id);\r",
+							"\r",
+							"pm.test(\"Name is correct\", () => {\r",
+							"  pm.expect(jsonData.name).to.eql(pm.variables.get(\"randomName\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deliberate Fail Test\", () => {\r",
+							"  pm.expect(jsonData.job).to.eql(\"WrongJob\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{randomName}}\",\r\n  \"job\": \"{{randomJob}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users\n\n",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users\n\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.test(\"Check updated job\", () => {\r",
+							"  pm.expect(data.job).to.eql(\"SQA Engineer\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"WardahSattar\",\r\n  \"job\": \"SQA Engineer\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Update Job",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.test(\"Job updated using PATCH\", () => {\r",
+							"  pm.expect(data.job).to.eql(\"Lead QA\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"job\": \"Lead QA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 204 No Content\", () => {\r",
+							"\r",
+							"pm.response.to.have.status(204);\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Register User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.variables.set(\"userToken\", data.token);\r",
+							"\r",
+							"pm.test(\"Token is saved\", () => {\r",
+							"  pm.expect(data).to.have.property(\"token\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"eve.holt@reqres.in\",\r\n  \"password\": \"pistol\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Delayed with Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.headers.add({ key: \"x-api-key\", value: \"reqres-free-v1\" });\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response delay test successful\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/users?delay=3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "delay",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deliberate Fail Test",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"testPurpose\", \"fail\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Log purpose\r",
+							"console.log(\"Test purpose:\", pm.variables.get(\"testPurpose\"));\r",
+							"\r",
+							"// Actual test - will deliberately fail\r",
+							"pm.test(\"This test will deliberately fail\", () => {\r",
+							"  pm.expect(\"actual\").to.eql(\"expected\"); // mismatch to fail\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set and Reset Variable Test",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Set variable before request\r",
+							"pm.variables.set(\"userId\", 2);\r",
+							"console.log(\"Pre-request: Set userId =\", pm.variables.get(\"userId\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json();\r",
+							"\r",
+							"// Log the value from response and the variable\r",
+							"console.log(\"Response User ID:\", res.data.id);\r",
+							"console.log(\"Variable userId:\", pm.variables.get(\"userId\"));\r",
+							"\r",
+							"// Test comparison\r",
+							"pm.test(\"User ID matches the pre-set variable\", () => {\r",
+							"  pm.expect(res.data.id).to.eql(pm.variables.get(\"userId\"));\r",
+							"});\r",
+							"\r",
+							"// Now reset the variable\r",
+							"pm.variables.unset(\"userId\");\r",
+							"console.log(\"userId variable reset after test.\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

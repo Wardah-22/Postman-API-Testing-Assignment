@@ -1,0 +1,313 @@
+{
+	"id": "4e87c5b8-52de-49a3-9a58-cd3733970494",
+	"name": "Reqres API Testing",
+	"timestamp": "2025-07-21T09:39:17.508Z",
+	"collection_id": "46924775-ee63ef99-e48f-431a-ac73-7c897d5f6807",
+	"folder_id": 0,
+	"environment_id": "46924775-0687951e-2894-41c2-935b-ef78d779a3b5",
+	"totalPass": 9,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-07-21T09:38:25.937Z",
+	"totalFail": 2,
+	"results": [
+		{
+			"id": "c8a239fb-0341-4636-8f33-c52e95e36b1e",
+			"name": "GET List Users",
+			"url": "https://reqres.in/api/users?page=2",
+			"time": 2704,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"User list is not empty": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User list is not empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2704
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"User list is not empty": true
+				}
+			]
+		},
+		{
+			"id": "a8e9201a-6202-42e2-b0be-c45413d6a0aa",
+			"name": "POST Create User",
+			"url": "https://reqres.in/api/users\n\n",
+			"time": 1444,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Name is correct": true,
+				"Deliberate Fail Test": false
+			},
+			"testPassFailCounts": {
+				"Name is correct": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deliberate Fail Test": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				1444
+			],
+			"allTests": [
+				{
+					"Name is correct": true,
+					"Deliberate Fail Test": false
+				}
+			]
+		},
+		{
+			"id": "60d4f8fa-51b4-4e14-91cf-ee4fb6ec969b",
+			"name": "PUT Update User",
+			"url": "https://reqres.in/api/users/2",
+			"time": 4887,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Check updated job": true
+			},
+			"testPassFailCounts": {
+				"Check updated job": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4887
+			],
+			"allTests": [
+				{
+					"Check updated job": true
+				}
+			]
+		},
+		{
+			"id": "a8054292-6f24-4955-9d98-96cf6a36ce3e",
+			"name": "PATCH Update Job",
+			"url": "https://reqres.in/api/users/2",
+			"time": 2262,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Job updated using PATCH": true
+			},
+			"testPassFailCounts": {
+				"Job updated using PATCH": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2262
+			],
+			"allTests": [
+				{
+					"Job updated using PATCH": true
+				}
+			]
+		},
+		{
+			"id": "5da97c6d-8d8f-4132-89bd-155bcde08d1f",
+			"name": "DELETE User",
+			"url": "https://reqres.in/api/users/2",
+			"time": 5127,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status is 204 No Content": true
+			},
+			"testPassFailCounts": {
+				"Status is 204 No Content": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5127
+			],
+			"allTests": [
+				{
+					"Status is 204 No Content": true
+				}
+			]
+		},
+		{
+			"id": "a1dc4fa7-0f22-4ed5-aaf5-fbc5975f3b28",
+			"name": "POST Register User",
+			"url": "https://reqres.in/api/register",
+			"time": 1980,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Token is saved": true
+			},
+			"testPassFailCounts": {
+				"Token is saved": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1980
+			],
+			"allTests": [
+				{
+					"Token is saved": true
+				}
+			]
+		},
+		{
+			"id": "e3aec718-041e-4906-8747-4025d52b653a",
+			"name": "GET Delayed with Token",
+			"url": "https://reqres.in/api/users?delay=3",
+			"time": 5647,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response delay test successful": true
+			},
+			"testPassFailCounts": {
+				"Response delay test successful": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5647
+			],
+			"allTests": [
+				{
+					"Response delay test successful": true
+				}
+			]
+		},
+		{
+			"id": "76940498-a8b9-441c-9ffe-ff3ecaca0afa",
+			"name": "Deliberate Fail Test",
+			"url": "https://reqres.in/api/users/2",
+			"time": 6847,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"This test will deliberately fail": false
+			},
+			"testPassFailCounts": {
+				"This test will deliberately fail": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6847
+			],
+			"allTests": [
+				{
+					"This test will deliberately fail": false
+				}
+			]
+		},
+		{
+			"id": "322e0051-d948-401f-9eaa-bad819c9011f",
+			"name": "Set and Reset Variable Test",
+			"url": "https://reqres.in/api/users/2",
+			"time": 18909,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"User ID matches the pre-set variable": true
+			},
+			"testPassFailCounts": {
+				"User ID matches the pre-set variable": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18909
+			],
+			"allTests": [
+				{
+					"User ID matches the pre-set variable": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 49807,
+	"collection": {
+		"requests": [
+			{
+				"id": "c8a239fb-0341-4636-8f33-c52e95e36b1e",
+				"method": "GET"
+			},
+			{
+				"id": "a8e9201a-6202-42e2-b0be-c45413d6a0aa",
+				"method": "POST"
+			},
+			{
+				"id": "60d4f8fa-51b4-4e14-91cf-ee4fb6ec969b",
+				"method": "PUT"
+			},
+			{
+				"id": "a8054292-6f24-4955-9d98-96cf6a36ce3e",
+				"method": "PATCH"
+			},
+			{
+				"id": "5da97c6d-8d8f-4132-89bd-155bcde08d1f",
+				"method": "DELETE"
+			},
+			{
+				"id": "a1dc4fa7-0f22-4ed5-aaf5-fbc5975f3b28",
+				"method": "POST"
+			},
+			{
+				"id": "e3aec718-041e-4906-8747-4025d52b653a",
+				"method": "GET"
+			},
+			{
+				"id": "76940498-a8b9-441c-9ffe-ff3ecaca0afa",
+				"method": "GET"
+			},
+			{
+				"id": "322e0051-d948-401f-9eaa-bad819c9011f",
+				"method": "GET"
+			}
+		]
+	}
+}
