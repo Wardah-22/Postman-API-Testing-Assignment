@@ -21,4 +21,16 @@ This repository contains a Postman collection that demonstrates the use of vario
 3. Run the collection using Postman Collection Runner or manually test endpoints.
 
 
+## 💡 Note
+
+- The test case that fails is intentional to demonstrate assertion failure handling.
+- Random data is generated using JavaScript in the Pre-request Script tab.
+
+## 👤 Author
+
+Wardah Sattar  
+BS Software Engineering  
+
+
+
 
